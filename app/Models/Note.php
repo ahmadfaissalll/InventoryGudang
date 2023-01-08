@@ -9,9 +9,15 @@ class Note extends Model
 {
   use HasFactory;
 
+  protected $with = 'user';
+
   protected $guarded = [
     'id',
     'created_at',
     'updated_at',
   ];
+
+  public function user() {
+    return $this->belongsTo(User::class, 'id_user');
+  }
 }
