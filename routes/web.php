@@ -1,6 +1,9 @@
 <?php
 
+use App\Models\Barang;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\{NoteController, BarangController, BarangKeluarController};
 
 /*
 |--------------------------------------------------------------------------
@@ -14,5 +17,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+  return view('dashboard.home');
+});
+
+Route::resource('notes', NoteController::class)->only(['index', 'store', 'destroy']);
+
+Route::resources([
+  'barang' => BarangController::class,
+  'barang-keluar' => BarangKeluarController::class,
+]);
+
+// GET SINGLE DATA BARANG
+Route::get('/getBarang/{barang}', function(Request $request, Barang $barang) {
+  return $barang;
 });

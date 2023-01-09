@@ -20,10 +20,11 @@ class BarangKeluarFactory extends Factory
     $barang = Barang::find(mt_rand(1, Barang::count()));
 
     return [
-      'nama_barang' => $barang->nama,
       'id_barang' => $barang->id,
       'jumlah' => mt_rand(1, $barang->stok),
       'penerima' => fake()->name,
+      'keterangan' => fake()->sentence,
+      'tanggal' => fake()->dateTimeBetween($startDate = '-2 years', $endDate = 'now'),
     ];
   }
 }
