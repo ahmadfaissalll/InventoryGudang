@@ -7,13 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Barang extends Model
 {
-    use HasFactory;
+  use HasFactory;
 
-    protected $table = 'barang';
+  protected $table = 'barang';
 
-    protected $guarded = [
-      'id',
-      'created_at',
-      'updated_at',
-    ];
+  protected $guarded = [
+    'id',
+    'created_at',
+    'updated_at',
+  ];
+
 }
