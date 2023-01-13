@@ -19,7 +19,7 @@ return new class extends Migration
       $table->unsignedInteger('jumlah');
       $table->string('pengirim', 100);
       $table->text('keterangan');
-      $table->timestamp('tanggal');
+      $table->date('tanggal');
       $table->timestamps();
     });
   }

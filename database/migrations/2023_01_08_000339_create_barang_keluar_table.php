@@ -15,11 +15,11 @@ return new class extends Migration
   {
     Schema::create('barang_keluar', function (Blueprint $table) {
       $table->id();
-      $table->foreignId('id_barang')->nullable()->constrained('barang')->nullOnDelete();
+      $table->foreignId('id_barang')->nullable()->constrained('barang')->onDelete('cascade');
       $table->unsignedInteger('jumlah');
       $table->string('penerima', 100);
       $table->text('keterangan');
-      $table->timestamp('tanggal');
+      $table->date('tanggal');
       $table->timestamps();
     });
   }

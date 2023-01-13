@@ -3,7 +3,7 @@
 use App\Models\Barang;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\{NoteController, BarangController, BarangKeluarController};
+use App\Http\Controllers\{NotesController, BarangController, BarangKeluarController};
 
 /*
 |--------------------------------------------------------------------------
@@ -20,7 +20,7 @@ Route::get('/', function () {
   return view('dashboard.home');
 });
 
-Route::resource('notes', NoteController::class)->only(['index', 'store', 'destroy']);
+Route::resource('notes', NotesController::class)->only(['index', 'store', 'destroy']);
 
 Route::resources([
   'barang' => BarangController::class,

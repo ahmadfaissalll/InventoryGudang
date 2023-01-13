@@ -15,7 +15,6 @@
 
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
 
-
     <link rel="stylesheet" href="/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
     <link rel="stylesheet" href="/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
@@ -46,9 +45,8 @@
                         <!-- User image -->
                         <li class="user-header bg-primary">
                             <img src="/img/user1-128x128.jpg" class="img-circle elevation-2">
-
                             <p>
-                                <small>Faisal</small>
+                              Faisal
                             </p>
                         </li>
                         <!-- Menu Footer-->
