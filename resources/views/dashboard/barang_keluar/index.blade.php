@@ -4,7 +4,7 @@
               <div class="container-fluid">
                   <div class="row mb-2">
                       <div class="col-sm-6">
-                          <h1>Barang</h1>
+                          <h1>Barang Keluar</h1>
                       </div>
                       <div class="col-sm-6">
                           <ol class="breadcrumb float-sm-right">
@@ -33,11 +33,11 @@
                                       <thead>
                                           <tr>
                                               <th>#</th>
-                                              <th>Nama</th>
-                                              <th>Jenis</th>
-                                              <th>Merk</th>
-                                              <th>Ukuran</th>
-                                              <th>Stok</th>
+                                              <th>Nama Barang</th>
+                                              <th>Jumlah</th>
+                                              <th>Penerima</th>
+                                              <th>Keterangan</th>
+                                              <th>Tanggal</th>
                                               <th>Aksi</th>
                                           </tr>
                                       </thead>
@@ -54,7 +54,7 @@
                                                   <td>{{ $barangKeluar->penerima }}</td>
                                                   <td>{{ $barangKeluar->keterangan }}</td>
                                                   <td>
-                                                      {{ Carbon\Carbon::parse($barangKeluar->tanggal)->translatedFormat('l, d F Y / H:i:s') }}
+                                                      {{ Carbon\Carbon::parse($barangKeluar->tanggal)->translatedFormat('l, d F Y') }}
                                                   </td>
                                                   <td>
                                                     
