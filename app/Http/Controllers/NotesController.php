@@ -7,14 +7,16 @@ use Illuminate\Http\Request;
 
 class NotesController extends Controller
 {
+  
   /**
    * Display a listing of the resource.
+   * 
    *
    * @return \Illuminate\Http\Response
    */
   public function index()
   {
-    $notes = Note::latest()->paginate(5);
+    $notes = Note::latest()->paginate(10);
 
     return view('dashboard.notes.index', ['notes' => $notes]);
   }

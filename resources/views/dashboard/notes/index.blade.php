@@ -19,18 +19,6 @@
         </div>
 
         <div class="col-12">
-            {{-- <div class="card"> --}}
-            {{-- <div class="card-body">
-                    <div class="d-sm-flex justify-content-between align-items-center">
-                        <h2>Notes</h2>
-                    </div>
-
-                    <div class="col-sm-6">
-                      <ol class="breadcrumb float-sm-right">
-                          <li class="breadcrumb-item"><a href="#">Home</a></li>
-                          <li class="breadcrumb-item active">Notes</li>
-                      </ol>
-                  </div> --}}
 
             <div class="market-status-table mt-4">
                 <div class="table-responsive">
@@ -55,7 +43,6 @@
                             @csrf
                             <tr class="table-active">
                                 <td>
-                                    {{-- <center><input type='hidden' /></center> --}}
                                 </td>
                                 <td>
                                     <center> <input type='text' class='form-control' name='konten' required />
@@ -78,12 +65,31 @@
                             // No notes
                             $counter = ($notes->currentpage() - 1) * $notes->perpage() + 1;
                         @endphp
-                        @forelse ($notes as $key => $note)
-                            <x-notes-row :note="$note" :counter="$counter" />
 
-                            @php
-                                $counter++;
-                            @endphp
+                        @forelse ($notes as $note)
+                            <tr>
+                                <td>
+                                    <center>{{ $counter++ }}</center>
+                                </td>
+                                <td>
+                                    <center>{{ $note->konten }}</center>
+                                </td>
+                                <td><strong>
+                                        <center>{{ $note->user->nickname }}</center>
+                                    </strong></td>
+                                <td>
+                                    <center>
+                                        <form method='POST' action='{{ route('notes.destroy', $note->id) }}'
+                                            class="inline">
+                                            @csrf
+                                            @method('DELETE')
+                                            <input type='submit' class='btn btn-danger btn-sm btn-delete'
+                                                value='Hapus'
+                                                onclick="return confirm('Anda yakin ingin menghapus note ini?')" />
+                                        </form>
+                                    </center>
+                                </td>
+                            </tr>
                         @empty
                             Listing Kosong
                         @endforelse

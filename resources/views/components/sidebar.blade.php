@@ -16,14 +16,14 @@
                 <img src="/img/user1-128x128.jpg" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block">Icall</a>
+                <a href="profile" class="d-block">{{ auth()->user()->nickname ?? 'Admin' }}</a>
             </div>
         </div>
 
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column">
                 <li class="nav-item">
-                    <a href="/" class="nav-link {{ $isLinkActive('/') }}">
+                    <a href="/" class="nav-link {{ $isLinkActive('dashboard') }}">
                         <i class="nav-icon fas fa-home"></i>
                         <p>
                             Beranda
@@ -43,6 +43,14 @@
                         <i class="nav-icon fas fa-box"></i>
                         <p>
                             Barang
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/barang-masuk" class="nav-link {{ $isLinkActive('barang-masuk') }}">
+                        <i class="nav-icon fas fa-box-open"></i>
+                        <p>
+                            Barang Masuk
                         </p>
                     </a>
                 </li>

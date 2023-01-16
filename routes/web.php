@@ -3,7 +3,7 @@
 use App\Models\Barang;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\{NotesController, BarangController, BarangKeluarController};
+use App\Http\Controllers\{NotesController, BarangController, BarangMasukController, BarangKeluarController, UserController};
 
 /*
 |--------------------------------------------------------------------------
@@ -16,18 +16,38 @@ use App\Http\Controllers\{NotesController, BarangController, BarangKeluarControl
 |
 */
 
-Route::get('/', function () {
-  return view('dashboard.home');
+
+Route::middleware('auth')->group(function () {
+
+  Route::redirect('/', '/dashboard');
+
+  Route::get('/dashboard', function () {
+    return view('dashboard.home');
+  });
+
+  Route::resource('notes', NotesController::class)->only(['index', 'store', 'destroy']);
+
+  Route::resources([
+    'barang' => BarangController::class,
+    'barang-masuk' => BarangMasukController::class,
+    'barang-keluar' => BarangKeluarController::class,
+  ]);
 });
 
-Route::resource('notes', NotesController::class)->only(['index', 'store', 'destroy']);
+Route::controller(UserController::class)->group(function () {
+  Route::middleware('guest')->group(function () {
+    // Register FORM
+    Route::get('/register', 'create');
 
-Route::resources([
-  'barang' => BarangController::class,
-  'barang-keluar' => BarangKeluarController::class,
-]);
+    Route::post('/register', 'store');
 
-// GET SINGLE DATA BARANG
-Route::get('/getBarang/{barang}', function(Request $request, Barang $barang) {
-  return $barang;
+    // LOGIN FORM
+    Route::get('/login', 'index')->name('login');
+
+    // VALIDATE LOGIn
+    Route::post('/login', 'authenticate');
+  });
+
+  Route::post('/logout', 'logout')->middleware('auth');
 });
+

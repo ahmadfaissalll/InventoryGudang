@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Requests\BarangKeluar;
+namespace App\Http\Requests\User;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreRequest extends FormRequest
 {
@@ -13,7 +14,7 @@ class StoreRequest extends FormRequest
    */
   public function authorize()
   {
-    return auth()->check();
+    return !auth()->check();
   }
 
   /**
@@ -24,11 +25,10 @@ class StoreRequest extends FormRequest
   public function rules()
   {
     return [
-      'id_barang' => 'required|numeric',
-      'jumlah' => 'required|numeric',
-      'penerima' => 'required',
-      'keterangan' => 'required',
-      'tanggal' => 'date_format:Y-m-d',
+      'username' => ['required', Rule::unique('users')],
+      'email' => ['required', 'email', Rule::unique('users')],
+      'password' => 'required',
+      'nickname' => ['required', Rule::unique('users')],
     ];
   }
 }

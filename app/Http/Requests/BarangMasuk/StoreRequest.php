@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\BarangKeluar;
+namespace App\Http\Requests\BarangMasuk;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateRequest extends FormRequest
+class StoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class UpdateRequest extends FormRequest
      */
     public function authorize()
     {
-      return auth()->check();
+        return auth()->check();
     }
 
     /**
@@ -26,9 +26,16 @@ class UpdateRequest extends FormRequest
       return [
         'id_barang' => 'required|numeric',
         'jumlah' => 'required|numeric',
-        'penerima' => 'required',
+        'pengirim' => 'required',
         'keterangan' => 'required',
         'tanggal' => 'date_format:Y-m-d',
-    ];
+      ];
+    }
+
+    public function messages() {
+      return [
+        'id_barang.required' => 'Nama barang harus diisi',
+        'id_barang.numeric' => 'Ada yang salah, coba refresh halaman'
+      ];
     }
 }

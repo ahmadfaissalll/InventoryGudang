@@ -39,14 +39,15 @@
                 <li class="nav-item dropdown user-menu">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
                         <img src="/img/user1-128x128.jpg" class="user-image img-circle elevation-2">
-                        <span class="d-none d-md-inline">Faisal</span>
+                        <span class="d-none d-md-inline">{{ auth()->user()->nickname ?? 'Admin' }}</span>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                         <!-- User image -->
                         <li class="user-header bg-primary">
                             <img src="/img/user1-128x128.jpg" class="img-circle elevation-2">
                             <p>
-                              Faisal
+                              {{ auth()->user()->nickname ?? 'Admin' }}
+                              <small>Bertugas sejak {{ auth()->user()->created_at->diffForHumans() }}</small>
                             </p>
                         </li>
                         <!-- Menu Footer-->

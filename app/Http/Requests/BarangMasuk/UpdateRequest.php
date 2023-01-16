@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\BarangKeluar;
+namespace App\Http\Requests\BarangMasuk;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreRequest extends FormRequest
+class UpdateRequest extends FormRequest
 {
   /**
    * Determine if the user is authorized to make this request.
@@ -26,7 +26,7 @@ class StoreRequest extends FormRequest
     return [
       'id_barang' => 'required|numeric',
       'jumlah' => 'required|numeric',
-      'penerima' => 'required',
+      'pengirim' => 'required',
       'keterangan' => 'required',
       'tanggal' => 'date_format:Y-m-d',
     ];

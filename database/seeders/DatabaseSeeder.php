@@ -39,7 +39,13 @@ class DatabaseSeeder extends Seeder
     BarangMasuk::factory(20)->create();
 
     Note::factory(10)->create();
-    
+
+    // TRIGGER TAMBAH STOk
+    DB::unprepared("
+      CREATE TRIGGER `tambah_stok` AFTER INSERT ON `barang_masuk` FOR EACH ROW UPDATE barang SET stok = stok + NEW.jumlah 
+      WHERE id = NEW.id_barang
+    ");
+
     // TRIGGER KURANGI STOk
     DB::unprepared("
       CREATE TRIGGER `kurangi_stok` AFTER INSERT ON `barang_keluar` FOR EACH ROW UPDATE barang SET stok = stok - NEW.jumlah 
