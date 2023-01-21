@@ -1,4 +1,4 @@
-<x-layout>
+<x-layout :title="'Barang Masuk'">
   <div class="content-wrapper">
       <section class="content-header">
           <div class="container-fluid">
@@ -18,14 +18,13 @@
           </div>
       </section>
 
-
       <section class="content">
           <div class="container-fluid">
               <div class="row">
                   <div class="col-12">
                       <div class="card">
                           <div class="card-header">
-                              <a href="/barang-masuk/create" class="btn btn-success">Tambah Data</a>
+                              <a href="/dashboard/barang-masuk/create" class="btn btn-success">Tambah Data</a>
                           </div>
 
                           <div class="card-body">
@@ -58,12 +57,12 @@
                                               </td>
                                               <td>
                                                 
-                                                <form method="post" action="/barang-masuk/{{ $barangMasuk->id }}"
+                                                <form method="post" action="/dashboard/barang-masuk/{{ $barangMasuk->id }}"
                                                       class="form-inline">
                                                       @csrf
                                                       @method('DELETE')
                                                       <div class="form-group mr-1">
-                                                          <a href="/barang-masuk/{{ $barangMasuk->id }}/edit"
+                                                          <a href="/dashboard/barang-masuk/{{ $barangMasuk->id }}/edit"
                                                               class="btn btn-info">Edit</a>
                                                       </div>
                                                       <button type="submit" class="btn btn-danger"
