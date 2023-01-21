@@ -1,27 +1,24 @@
-<x-layout>
+<x-layout :title="'Tambah Edit Barang Keluar'">
     <div class="content-wrapper px-4">
         <section class="content-header">
-            {{-- <div class=""> --}}
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Barang</h1>
+                    <h1>Barang Keluar</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="/">Home</a></li>
-                        <li class="breadcrumb-item"><a href="/barang">Barang</a></li>
+                        <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
+                        <li class="breadcrumb-item"><a href="/dashboard/barang-keluar">Barang Keluar</a></li>
                         <li class="breadcrumb-item active">Edit</li>
                     </ol>
                 </div>
             </div>
-            {{-- </div> --}}
         </section>
         <div class="card card-primary">
             <div class="card-header p-1">
-                {{-- <h3 class="card-title">Quick Example</h3> --}}
             </div>
 
-            <form method="post" action="/barang-keluar/{{ $barangKeluar->id }}" class="form-group">
+            <form method="post" action="/dashboard/barang-keluar/{{ $barangKeluar->id }}" class="form-group">
                 @csrf
                 @method('PUT')
                 <div class="card-body">
@@ -31,7 +28,7 @@
                             name="id_barang" placeholder="Select siswa">
                             <option value="">Pilih barang</option>
                             @foreach ($barangs as $barang)
-                                <option value="{{ $barang->id }}" {{ $barang->nama == $barangKeluar->barang->nama ? 'selected' : '' }}>
+                                <option value="{{ $barang->id }}" @selected($barang->id == $barangKeluar->barang->id)>
                                     {{ $barang->nama }}</option>
                             @endforeach
                         </select>
@@ -77,13 +74,12 @@
                             <p class="text-danger">{{ $message }}</p>
                         @enderror
                     </div>
-                </div>
-        </div>
 
-        <div class="card-footer">
-            <button type="submit" class="btn btn-primary">Update</button>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Update</button>
+                    </div>
+                </div>
+            </form>
         </div>
-        </form>
-    </div>
     </div>
 </x-layout>

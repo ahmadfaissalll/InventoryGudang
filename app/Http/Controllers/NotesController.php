@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Note;
+use Illuminate\Support\Facades\Gate;
+use App\Http\Requests\Note\{StoreRequest, UpdateRequest};
 use Illuminate\Http\Request;
 
 class NotesController extends Controller
 {
-  
   /**
    * Display a listing of the resource.
    * 
@@ -16,7 +17,7 @@ class NotesController extends Controller
    */
   public function index()
   {
-    $notes = Note::latest()->paginate(10);
+    $notes = Note::orderByDesc('created_at')->paginate(10);
 
     return view('dashboard.notes.index', ['notes' => $notes]);
   }
@@ -27,17 +28,29 @@ class NotesController extends Controller
    * @param  \Illuminate\Http\Request  $request
    * @return \Illuminate\Http\Response
    */
-  public function store(Request $request)
+  public function store(StoreRequest $request)
   {
-    $formFields = $request->validate([
-      'konten' => 'required',
-    ]);
+    $formFields = $request->validated();
 
-    $formFields['id_user'] = 2;
+    $formFields['id_user'] = auth()->id();
 
     Note::create($formFields);
 
     return redirect()->route('notes.index')->with('success', 'Notes berhasil ditambahkan');
+  }
+
+  public function update(UpdateRequest $request, Note $note)
+  {
+    // verifikasi pemilik notes
+    if (Gate::denies('is-note-owner', $note)) {
+      return to_route('notes.index')->with('failed', 'Maaf anda bukan pemilik notes ini');
+    }
+
+    $formFields = $request->validated();
+
+    $note->update($formFields);
+
+    return to_route('notes.index')->with('success', 'Notes berhasil diubah');
   }
 
   /**
@@ -48,8 +61,13 @@ class NotesController extends Controller
    */
   public function destroy(Note $note)
   {
+    // verifikasi pemilik notes
+    if (Gate::denies('is-note-owner', $note)) {
+      return to_route('notes.index')->with('failed', 'Maaf anda bukan pemilik notes ini');
+    }
+
     Note::destroy($note->id);
 
-    return back()->with('success', 'Notes berhasil dihapus');
+    return to_route('notes.index')->with('success', 'Notes berhasil dihapus');
   }
 }

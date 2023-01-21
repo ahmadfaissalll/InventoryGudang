@@ -4,6 +4,7 @@ use App\Models\Barang;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{NotesController, BarangController, BarangMasukController, BarangKeluarController, UserController};
+use App\Models\Note;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,15 +23,24 @@ Route::middleware('auth')->group(function () {
   Route::redirect('/', '/dashboard');
 
   Route::get('/dashboard', function () {
-    return view('dashboard.home');
+    $jumlahBarang = Barang::count();
+
+    return view('dashboard.home', ['jumlahBarang' => $jumlahBarang]);
   });
 
-  Route::resource('notes', NotesController::class)->only(['index', 'store', 'destroy']);
+  Route::resource('dashboard/notes', NotesController::class)->except(['edit']);
+
+  // get single notes for edit modal
+  Route::get('/notes/{id}', function(int $id) {
+    $note = Note::without('user')->findOrFail($id, ['id', 'konten']);
+
+    return $note;
+  })->where('id', '[0-9]+');
 
   Route::resources([
-    'barang' => BarangController::class,
-    'barang-masuk' => BarangMasukController::class,
-    'barang-keluar' => BarangKeluarController::class,
+    'dashboard/barang' => BarangController::class,
+    'dashboard/barang-masuk' => BarangMasukController::class,
+    'dashboard/barang-keluar' => BarangKeluarController::class,
   ]);
 });
 
@@ -50,4 +60,3 @@ Route::controller(UserController::class)->group(function () {
 
   Route::post('/logout', 'logout')->middleware('auth');
 });
-

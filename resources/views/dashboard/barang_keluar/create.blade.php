@@ -1,4 +1,4 @@
-<x-layout>
+<x-layout :title="'Tambah Data Barang Keluar'">
     <div class="content-wrapper px-4">
         <section class="content-header">
             {{-- <div class=""> --}}
@@ -8,8 +8,8 @@
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="/">Home</a></li>
-                        <li class="breadcrumb-item"><a href="/barang-keluar">Barang Keluar</a></li>
+                        <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
+                        <li class="breadcrumb-item"><a href="/dashboard/barang-keluar">Barang Keluar</a></li>
                         <li class="breadcrumb-item active">Tambah</li>
                     </ol>
                 </div>
@@ -21,7 +21,7 @@
                 {{-- <h3 class="card-title">Quick Example</h3> --}}
             </div>
 
-            <form method="post" action="/barang-keluar" class="form-group">
+            <form method="post" action="/dashboard/barang-keluar" class="form-group">
                 @csrf
                 <div class="card-body">
                     <div class="form-group">
@@ -30,7 +30,7 @@
                             name="id_barang" placeholder="Select siswa">
                             <option value="">Pilih barang</option>
                             @foreach ($barangs as $barang)
-                                <option value="{{ $barang->id }}">{{ $barang->nama }}</option>
+                                <option value="{{ $barang->id }}" @selected(old('id_barang') == $barang->id)>{{ $barang->nama }}</option>
                             @endforeach
                         </select>
 

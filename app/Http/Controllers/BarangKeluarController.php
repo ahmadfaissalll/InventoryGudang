@@ -5,19 +5,20 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\{Barang, BarangKeluar};
 use App\Http\Requests\BarangKeluar\{StoreRequest, UpdateRequest};
+use Illuminate\Support\Facades\DB;
 
 class BarangKeluarController extends Controller
 {
   public function index()
   {
-    $barangKeluars = BarangKeluar::latest()->paginate(10);
+    $barangKeluars = BarangKeluar::orderByDesc('created_at')->paginate(10);
 
     return view('dashboard.barang_keluar.index', ['barangKeluars' => $barangKeluars]);
   }
 
   public function create()
   {
-    $barangs = Barang::latest()->get();
+    $barangs = Barang::orderByDesc('created_at')->get();
 
     return view('dashboard.barang_keluar.create', ['barangs' => $barangs]);
   }
@@ -41,12 +42,32 @@ class BarangKeluarController extends Controller
     ]);
   }
 
-  public function update(UpdateRequest $request, BarangKeluar $barangKeluar) {
+  public function update(UpdateRequest $request, BarangKeluar $barangKeluar)
+  {
     $formFields = $request->validated();
 
-    $barangKeluar->update($formFields);
+    try {
+      DB::beginTransaction();
 
-    return to_route('barang-keluar.index')->with('success', 'Data berhasil diubah');
+      $barang = $barangKeluar->barang;
+
+      // stok baru
+      $newStok = ($barang->stok + $barangKeluar->jumlah) - intval($formFields['jumlah']);
+
+      $barang->update(['stok' => $newStok]);
+
+      $barangKeluar->update($formFields);
+
+      DB::commit();
+
+      session()->flash('success', 'Data berhasil diubah');
+    } catch (\Exception) {
+      DB::rollBack();
+
+      session()->flash('failed', 'Data gagal diubah, silahkan coba lagi dan jika masalah berlanjut harap hubungi developer');
+    }
+
+    return to_route('barang-keluar.index');
   }
 
   public function destroy(BarangKeluar $barangKeluar)

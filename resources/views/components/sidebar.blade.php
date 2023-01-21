@@ -16,50 +16,40 @@
                 <img src="/img/user1-128x128.jpg" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="profile" class="d-block">{{ auth()->user()->nickname ?? 'Admin' }}</a>
+                <a href="/dashboard/profile" class="d-block">{{ auth()->user()->nickname ?? 'Admin' }}</a>
             </div>
         </div>
 
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column">
                 <li class="nav-item">
-                    <a href="/" class="nav-link {{ $isLinkActive('dashboard') }}">
+                    <a href="/dashboard" class="nav-link {{ $isLinkActive('dashboard') }}">
                         <i class="nav-icon fas fa-home"></i>
-                        <p>
-                            Beranda
-                        </p>
+                        <p>Beranda</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/notes" class="nav-link {{ $isLinkActive('notes') }}">
+                    <a href="/dashboard/notes" class="nav-link {{ $isLinkActive('dashboard/notes') }}">
                         <i class="nav-icon far fa-sticky-note"></i>
-                        <p>
-                            Notes
-                        </p>
+                        <p>Notes</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/barang" class="nav-link {{ $isLinkActive('barang') }}">
+                    <a href="/dashboard/barang" class="nav-link {{ $isLinkActive('dashboard/barang') }}">
                         <i class="nav-icon fas fa-box"></i>
-                        <p>
-                            Barang
-                        </p>
+                        <p>Barang</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/barang-masuk" class="nav-link {{ $isLinkActive('barang-masuk') }}">
+                    <a href="/dashboard/barang-masuk" class="nav-link {{ $isLinkActive('dashboard/barang-masuk') }}">
                         <i class="nav-icon fas fa-box-open"></i>
-                        <p>
-                            Barang Masuk
-                        </p>
+                        <p>Barang Masuk</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/barang-keluar" class="nav-link {{ $isLinkActive('barang-keluar') }}">
+                    <a href="/dashboard/barang-keluar" class="nav-link {{ $isLinkActive('dashboard/barang-keluar') }}">
                         <i class="nav-icon fas fa-box-open"></i>
-                        <p>
-                            Barang Keluar
-                        </p>
+                        <p>Barang Keluar</p>
                     </a>
                 </li>
             </ul>

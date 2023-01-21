@@ -21,11 +21,6 @@
             .form {
                 height: 90vh;
             }
-
-            /* .boxes .container {
-                display: block;
-                text-align: center;
-            } */
         }
     </style>
 </head>

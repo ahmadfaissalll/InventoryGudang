@@ -9,7 +9,7 @@ class BarangController extends Controller
 {
   public function index()
   {
-    $barangs = Barang::latest()->paginate(10);
+    $barangs = Barang::orderByDesc('created_at')->filter(request(['search']))->paginate(10);
 
     return view('dashboard.barang.index', ['barangs' => $barangs]);
   }

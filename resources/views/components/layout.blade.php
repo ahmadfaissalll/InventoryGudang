@@ -1,10 +1,11 @@
+@props(['title'])
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Inventory Gudang | Dashboard</title>
+    <title>Inventory Gudang | {{ $title ?? 'Dashbboard' }}</title>
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     {{-- FONT AWESOME ICON --}}
@@ -72,11 +73,11 @@
 
 
     <footer class="main-footer">
-        <strong>Copyright &copy; 2005-2023 <a href="#">Icall.io</a>.</strong>
+        <strong>Copyright &copy; 2005-{{ date('Y') }} <a href="/dashboard">Icall.io</a>.</strong>
         All rights reserved.
-        <div class="float-right d-none d-sm-inline-block">
+        {{-- <div class="float-right d-none d-sm-inline-block">
             <b>Version</b> 3.2.0
-        </div>
+        </div> --}}
     </footer>
 
     <script src="/plugins/jquery/jquery.min.js"></script>

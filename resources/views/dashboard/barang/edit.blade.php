@@ -1,4 +1,4 @@
-<x-layout>
+<x-layout :title="'Edit Data Barang'">
     <div class="content-wrapper px-4">
         <section class="content-header">
             {{-- <div class=""> --}}
@@ -8,8 +8,8 @@
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="/">Home</a></li>
-                        <li class="breadcrumb-item"><a href="/barang">Barang</a></li>
+                        <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
+                        <li class="breadcrumb-item"><a href="/dashboard/barang">Barang</a></li>
                         <li class="breadcrumb-item active">Edit</li>
                     </ol>
                 </div>
@@ -21,7 +21,7 @@
                 {{-- <h3 class="card-title">Quick Example</h3> --}}
             </div>
 
-            <form method="post" action="/barang/{{ $barang->id }}" class="form-group">
+            <form method="post" action="/dashboard/barang/{{ $barang->id }}" class="form-group">
                 @csrf
                 @method('PUT')
                 <div class="card-body">

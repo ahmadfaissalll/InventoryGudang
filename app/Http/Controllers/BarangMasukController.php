@@ -11,7 +11,7 @@ class BarangMasukController extends Controller
 {
   public function index()
   {
-    $barangMasuks = BarangMasuk::latest()->paginate(10);
+    $barangMasuks = BarangMasuk::orderByDesc('created_at')->paginate(10);
 
     return view('dashboard.barang_masuk.index', ['barangMasuks' => $barangMasuks]);
   }

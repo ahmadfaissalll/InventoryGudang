@@ -17,4 +17,14 @@ class Barang extends Model
     'updated_at',
   ];
 
+  public function scopeFilter($query, array $filters)
+  {
+    if ($filters['search'] ?? false) {
+      $expression = ['like', '%' . request('search') . '%'];
+
+      $query->where('nama', ...$expression)
+        ->orWhere('jenis', ...$expression)
+        ->orWhere('merk', ...$expression);
+    }
+  }
 }

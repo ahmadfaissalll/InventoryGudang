@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests\User;
+namespace App\Http\Requests\UserProfile;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class StoreRequest extends FormRequest
+class UpdateRequest extends FormRequest
 {
   /**
    * Determine if the user is authorized to make this request.
@@ -14,8 +14,7 @@ class StoreRequest extends FormRequest
    */
   public function authorize()
   {
-    // Hanya guest yang bisa akses
-    return !auth()->check();
+    return auth()->check();
   }
 
   /**
@@ -25,11 +24,14 @@ class StoreRequest extends FormRequest
    */
   public function rules()
   {
+    $id = auth()->user()->id;
+
+    $uniqueRule = Rule::unique('users')->ignore($id);
+
     return [
-      'username' => ['required', Rule::unique('users')],
-      'email' => ['required', 'email', Rule::unique('users')],
-      'password' => 'required',
-      'nickname' => ['required', Rule::unique('users')],
+      'nickname' => ['required', $uniqueRule],
+      'username' => ['required', $uniqueRule],
+      'email' => ['required', 'email', $uniqueRule],
     ];
   }
 }

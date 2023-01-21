@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Inventory Gudang | Login</title>
+    <title>Inventory Gudang | Register</title>
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     {{-- ADMIN LTE THEME --}}
@@ -28,7 +28,7 @@
 <body>
     <div class="container">
         <div class="form">
-            <div class="col-lg-6">
+            <div class="col-lg-7">
                 <div class="card card-info">
                     <div class="card-header">
                         <h3 class="card-title">Register</h1>
@@ -81,7 +81,7 @@
                         </div>
 
                         <div class="card-footer">
-                            <button type="submit" class="btn btn-info">Sign in</button>
+                            <button type="submit" class="btn btn-info">Register</button>
                         </div>
                     </form>
                 </div>
