@@ -1,9 +1,8 @@
 <?php
 
 use App\Models\Barang;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\{NotesController, BarangController, BarangMasukController, BarangKeluarController, UserController};
+use App\Http\Controllers\{NotesController, BarangController, BarangMasukController, BarangKeluarController, PasswordController, UserController, UserProfileController};
 use App\Models\Note;
 
 /*
@@ -42,6 +41,9 @@ Route::middleware('auth')->group(function () {
     'dashboard/barang-masuk' => BarangMasukController::class,
     'dashboard/barang-keluar' => BarangKeluarController::class,
   ]);
+
+  Route::singleton('dashboard/profile', UserProfileController::class);
+  Route::singleton('dashboard/profile/edit-password', PasswordController::class)->except('show');
 });
 
 Route::controller(UserController::class)->group(function () {

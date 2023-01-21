@@ -51,16 +51,17 @@
                             <div class="form-group row">
                                 <label for="password" class="col-sm-2 col-form-label">Password</label>
                                 <div class="col-sm-10">
-                                    <input type="password" class="form-control" id="password" placeholder="Password" name="password">
+                                    <input type="password" class="form-control" id="password" placeholder="Password"
+                                        name="password">
                                 </div>
                             </div>
                             <div class="form-group ">
                                 <label for="remember_me">Remember Me</label>
-                                <input type="checkbox" id="remember_me" name="remember_me">
+                                <input type="checkbox" id="remember_me" name="remember_me" @checked(old('remember_me'))>
 
                                 @error('remember_me')
-                                        <p class="text-danger">{{ $message }}</p>
-                                    @enderror
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
                             </div>
                             <p>Belum punya akun? <a href="/register">Daftar</a></p>
                         </div>
