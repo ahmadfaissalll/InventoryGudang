@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 
 class NotesController extends Controller
 {
+
   /**
    * Display a listing of the resource.
    * 
@@ -41,11 +42,6 @@ class NotesController extends Controller
 
   public function update(UpdateRequest $request, Note $note)
   {
-    // verifikasi pemilik notes
-    if (Gate::denies('is-note-owner', $note)) {
-      return to_route('notes.index')->with('failed', 'Maaf anda bukan pemilik notes ini');
-    }
-
     $formFields = $request->validated();
 
     $note->update($formFields);
@@ -62,7 +58,7 @@ class NotesController extends Controller
   public function destroy(Note $note)
   {
     // verifikasi pemilik notes
-    if (Gate::denies('is-note-owner', $note)) {
+    if (Gate::denies('manipulate', $note)) {
       return to_route('notes.index')->with('failed', 'Maaf anda bukan pemilik notes ini');
     }
 

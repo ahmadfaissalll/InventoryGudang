@@ -28,7 +28,8 @@ class AuthServiceProvider extends ServiceProvider
   {
     $this->registerPolicies();
 
-    Gate::define('is-note-owner', function(User $user, Note $note) {
+    // used in verification on update, delete note
+    Gate::define('manipulate', function(User $user, Note $note) {
       return $user->id == $note->id_user;
     });
   }

@@ -37,14 +37,29 @@ class UserController extends Controller
   {
     $credentials = $request->validate([
       'email' => 'required|email',
-      'password' => 'required'
+      'password' => 'required',
     ]);
 
-    if (Auth::attempt($credentials)) {
+    $remember_me = false;
+
+    // kalo remember_me tidak null lakukan validasi
+    if (!is_null($request->input('remember_me'))) {
+      $request->validate([
+        'remember_me' => 'accepted'
+      ]);
+
+      $remember_me = true;
+    }
+
+    $isLoginSuccess = Auth::attempt(['email' => $credentials['email'], 'password' => $credentials['password']], $remember_me);
+
+    if ($isLoginSuccess) {
       $request->session()->regenerate();
 
       return redirect(RouteServiceProvider::HOME);
     }
+
+
 
     return redirect('/login')->withErrors([
       'email' => 'Invalid Credential'

@@ -80,7 +80,7 @@
                                         <center title="nickname">{{ $note->user->nickname }}</center>
                                     </strong></td>
                                 <td>
-                                    @can('is-note-owner', $note)
+                                    @can('manipulate', $note)
                                         <center>
                                             <button class="btn btn-sm btn-primary" data-toggle="modal"
                                                 data-target="#editModal" id="editBtn"
